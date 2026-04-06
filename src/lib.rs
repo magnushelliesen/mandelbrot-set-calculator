@@ -9,18 +9,16 @@ mod mandelbrot_calculator {
     /// Formats the sum of two numbers as string.
     #[pyfunction]
     fn is_in_mandelbrot_set(re: f64, im: f64, n: i64) -> PyResult<bool> {
-        let z_re: f64 = 0.0;
-        let z_im: f64 = 0.0;
+        let mut z_re: f64 = 0.0;
+        let mut z_im: f64 = 0.0;
         let _z_re: f64 = 0.0;
         let _z_im: f64 = 0.0;
 
         for _ in 0..n {
-            let z_re = _z_re.powf(2.0)-_z_im.powf(2.0) + re;
-            let z_im = 2.0 * _z_re * _z_im + im;
+            z_re =_z_re.powf(2.0)-_z_im.powf(2.0) + re + z_re;
+            z_im = 2.0 * _z_re * _z_im + im;
             let _z_re = z_re;
             let _z_im = z_im;
-
-            print!("{} {}\n", z_re, z_im);
         }
 
         Ok(
