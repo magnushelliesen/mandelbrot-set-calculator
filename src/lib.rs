@@ -8,18 +8,18 @@ mod mandelbrot_calculator {
 
     #[pyclass(get_all, set_all)]
     struct MandelbrotSet {
-        grid_size: i64
+        grid_size: usize
     }
 
     #[pymethods]
     impl MandelbrotSet {
         #[new]
-        fn new(grid_size: i64) -> Self {
+        fn new(grid_size: usize) -> Self {
             MandelbrotSet { grid_size }
         }
     
-        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> Vec<f64> {
-            vec![1.0, 2.0, 3.0, 4.0, 5.0]
+        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> [[f64; 2]; 2] {
+            [[re_min, re_max], [im_min, im_max]]
         }
     }
 
