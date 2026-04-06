@@ -6,6 +6,19 @@ mod mandelbrot_calculator {
     use std::f64;
     use pyo3::prelude::*;
 
+    #[pyclass(get_all, set_all)]
+    struct MandelbrotSet {
+        grid_size: i64
+    }
+
+    #[pymethods]
+    impl MandelbrotSet {
+        #[new]
+        fn new(grid_size: i64) -> Self {
+            MandelbrotSet { grid_size }
+        }
+    }
+
     #[pyfunction]
     fn is_in_mandelbrot_set(re: f64, im: f64, n: i64) -> PyResult<bool> {
         // Setup variabels
