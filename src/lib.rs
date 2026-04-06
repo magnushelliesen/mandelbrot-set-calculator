@@ -13,17 +13,18 @@ mod mandelbrot_calculator {
         let z_im: f64 = 0.0;
         let _z_re: f64 = 0.0;
         let _z_im: f64 = 0.0;
-        for _ in 0..n {
-            let z_re_1 = _z_re.powf(2.0)-_z_im.powf(2.0) + re;
-            let z_im_1 = 2.0 * _z_re * _z_im + im;
-            let _z_re_0 = z_re_1;
-            let _z_im_0 = z_im_1;
 
-            print!("{} {}\n", z_re_1, z_im_1);
+        for _ in 0..n {
+            let z_re = _z_re.powf(2.0)-_z_im.powf(2.0) + re;
+            let z_im = 2.0 * _z_re * _z_im + im;
+            let _z_re = z_re;
+            let _z_im = z_im;
+
+            print!("{} {}\n", z_re, z_im);
         }
 
         Ok(
-            if (z_re.powf(2.0) + z_im.powf(2.0)).sqrt() < 2.0 {
+            if (z_re.powf(2.0) + z_im.powf(2.0)).sqrt() <= 2.0 {
                 true
             } else {
                 false
