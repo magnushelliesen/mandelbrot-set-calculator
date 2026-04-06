@@ -9,14 +9,14 @@ mod mandelbrot_calculator {
     #[pyclass(get_all, set_all)]
     struct MandelbrotSet {
         grid_size: usize,
-        n_iter: i64
+        max_iter: i64
     }
 
     #[pymethods]
     impl MandelbrotSet {
         #[new]
-        fn new(grid_size: usize, n_iter: i64) -> Self {
-            MandelbrotSet { grid_size, n_iter}
+        fn new(grid_size: usize, max_iter: i64) -> Self {
+            MandelbrotSet { grid_size, max_iter}
         }
     
     fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> Vec<Vec<bool>> {
@@ -27,7 +27,7 @@ mod mandelbrot_calculator {
                 let re = re_min + (col as f64 / self.grid_size as f64) * (re_max - re_min);
                 let im = im_min + (row as f64 / self.grid_size as f64) * (im_max - im_min);
 
-                grid[row][col] = _is_in_mandelbrot_set(re, im, self.n_iter);
+                grid[row][col] = _is_in_mandelbrot_set(re, im, self.max_iter);
             }
         }
 
@@ -35,11 +35,11 @@ mod mandelbrot_calculator {
         }
     }
 
-    fn _is_in_mandelbrot_set(re: f64, im: f64, n_iter: i64) -> bool {
+    fn _is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> bool {
         let mut z_re = 0.0;
         let mut z_im = 0.0;
 
-        for _ in 0..n_iter {
+        for _ in 0..max_iter {
             let _z_re = z_re * z_re - z_im * z_im + re;
             let _z_im = 2.0 * z_re * z_im + im;
 
@@ -55,7 +55,7 @@ mod mandelbrot_calculator {
     }
 
     #[pyfunction]
-    fn is_in_mandelbrot_set(re: f64, im: f64, n_iter: i64) -> PyResult<bool> {
-        Ok(_is_in_mandelbrot_set(re, im, n_iter))
+    fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> PyResult<bool> {
+        Ok(_is_in_mandelbrot_set(re, im, max_iter))
     }
 }
