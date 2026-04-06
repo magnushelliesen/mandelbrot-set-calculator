@@ -8,44 +8,54 @@ mod mandelbrot_calculator {
 
     #[pyclass(get_all, set_all)]
     struct MandelbrotSet {
-        grid_size: usize
+        grid_size: usize,
+        n_iter: i64
     }
 
     #[pymethods]
     impl MandelbrotSet {
         #[new]
-        fn new(grid_size: usize) -> Self {
-            MandelbrotSet { grid_size }
+        fn new(grid_size: usize, n_iter: i64) -> Self {
+            MandelbrotSet { grid_size, n_iter}
         }
     
-        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> [[f64; 2]; 2] {
-            [[re_min, re_max], [im_min, im_max]]
+    fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> Vec<Vec<bool>> {
+        let mut grid = vec![vec![false; self.grid_size]; self.grid_size];
+
+        for row in 0..self.grid_size {
+            for col in 0..self.grid_size {
+                let re = re_min + (col as f64 / self.grid_size as f64) * (re_max - re_min);
+                let im = im_min + (row as f64 / self.grid_size as f64) * (im_max - im_min);
+
+                grid[row][col] = _is_in_mandelbrot_set(re, im, self.n_iter);
+            }
+        }
+
+        grid
         }
     }
 
-    #[pyfunction]
-    fn is_in_mandelbrot_set(re: f64, im: f64, n: i64) -> PyResult<bool> {
-        // Setup variabels
-        let mut z_re: f64 = 0.0;
-        let mut z_im: f64 = 0.0;
-        let _z_re: f64 = 0.0;
-        let _z_im: f64 = 0.0;
+    fn _is_in_mandelbrot_set(re: f64, im: f64, n_iter: i64) -> bool {
+        let mut z_re = 0.0;
+        let mut z_im = 0.0;
 
-        // Do n iterations of sequence
-        for _ in 0..n {
-            z_re =_z_re.powf(2.0)-_z_im.powf(2.0) + re + z_re;
-            z_im = 2.0 * _z_re * _z_im + im;
-            let _z_re = z_re;
-            let _z_im = z_im;
+        for _ in 0..n_iter {
+            let _z_re = z_re * z_re - z_im * z_im + re;
+            let _z_im = 2.0 * z_re * z_im + im;
+
+            z_re = _z_re;
+            z_im = _z_im;
+
+            if z_re * z_re + z_im * z_im > 4.0 {
+                return false;
+            }
         }
 
-        // Return true if absolute value of z <= 2
-        Ok(
-            if (z_re.powf(2.0) + z_im.powf(2.0)).sqrt() <= 2.0 {
-                true
-            } else {
-                false
-            }
-        )
+        true
+    }
+
+    #[pyfunction]
+    fn is_in_mandelbrot_set(re: f64, im: f64, n_iter: i64) -> PyResult<bool> {
+        Ok(_is_in_mandelbrot_set(re, im, n_iter))
     }
 }
