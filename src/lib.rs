@@ -24,8 +24,8 @@ mod mandelbrot_calculator {
 
         for row in 0..self.grid_size {
             for col in 0..self.grid_size {
-                let re = re_min + (col as f64 / self.grid_size as f64) * (re_max - re_min);
-                let im = im_min + (row as f64 / self.grid_size as f64) * (im_max - im_min);
+                let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
+                let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
 
                 grid[row][col] = _is_in_mandelbrot_set(re, im, self.max_iter);
             }
