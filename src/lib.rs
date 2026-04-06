@@ -17,6 +17,10 @@ mod mandelbrot_calculator {
         fn new(grid_size: i64) -> Self {
             MandelbrotSet { grid_size }
         }
+    
+        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> Vec<f64> {
+            vec![1.0, 2.0, 3.0, 4.0, 5.0]
+        }
     }
 
     #[pyfunction]
