@@ -4,3 +4,5 @@ Rust/Python code using Maturin, that allows the user to calculate the Mandelbrot
 Seems to work as intended:
 
 <img width="769" height="769" alt="image" src="https://github.com/user-attachments/assets/59a5cbf2-fc88-42b5-bdf2-f34171a42a11" />
+
+<img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/6de35b7e-4b4a-4a89-8f39-8e89a50ab1f5" />
