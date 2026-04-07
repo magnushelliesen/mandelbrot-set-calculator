@@ -18,20 +18,20 @@ mod mandelbrot_calculator {
         fn new(grid_size: usize, max_iter: i64) -> Self {
             MandelbrotSet { grid_size, max_iter}
         }
-    
-    fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> Vec<Vec<bool>> {
-        let mut grid = vec![vec![false; self.grid_size]; self.grid_size];
 
-        for row in 0..self.grid_size {
-            for col in 0..self.grid_size {
-                let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
-                let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
+        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> Vec<Vec<bool>> {
+            let mut grid = vec![vec![false; self.grid_size]; self.grid_size];
 
-                grid[row][col] = _is_in_mandelbrot_set(re, im, self.max_iter);
+            for row in 0..self.grid_size {
+                for col in 0..self.grid_size {
+                    let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
+                    let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
+
+                    grid[row][col] = _is_in_mandelbrot_set(re, im, self.max_iter);
+                }
             }
-        }
 
-        grid
+            grid
         }
     }
 
