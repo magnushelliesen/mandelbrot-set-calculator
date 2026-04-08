@@ -7,4 +7,4 @@ Seems to work as intended. This is a plot of the set:
 
 And this is a plot where we graduallty zoom into a point in the set:
 
-<img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/6de35b7e-4b4a-4a89-8f39-8e89a50ab1f5" />
+<img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/84b43fdb-61ea-44da-9ee5-b54e4cb5ec01" />
