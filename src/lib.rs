@@ -8,18 +8,17 @@ mod mandelbrot_calculator {
 
     #[pyclass(get_all, set_all)]
     struct MandelbrotSet {
-        grid_size: usize,
-        max_iter: i64
+        grid_size: usize
     }
 
     #[pymethods]
     impl MandelbrotSet {
         #[new]
-        fn new(grid_size: usize, max_iter: i64) -> Self {
-            MandelbrotSet {grid_size, max_iter}
+        fn new(grid_size: usize) -> Self {
+            MandelbrotSet {grid_size}
         }
 
-        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> Vec<Vec<bool>> {
+        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64, max_iter: i64) -> Vec<Vec<bool>> {
             let mut grid = vec![vec![false; self.grid_size]; self.grid_size];
 
             for row in 0..self.grid_size {
@@ -28,7 +27,7 @@ mod mandelbrot_calculator {
                     let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
 
                     // Rows are indexed top to bottom, so inversion is needed when populating the grid
-                    grid[self.grid_size - row - 1][col] = _is_in_mandelbrot_set(re, im, self.max_iter);
+                    grid[self.grid_size - row - 1][col] = _is_in_mandelbrot_set(re, im, max_iter);
                 }
             }
 
