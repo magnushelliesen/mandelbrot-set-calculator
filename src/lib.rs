@@ -16,7 +16,7 @@ mod mandelbrot_calculator {
     impl MandelbrotSet {
         #[new]
         fn new(grid_size: usize, max_iter: i64) -> Self {
-            MandelbrotSet { grid_size, max_iter}
+            MandelbrotSet {grid_size, max_iter}
         }
 
         fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64) -> Vec<Vec<bool>> {
@@ -27,7 +27,8 @@ mod mandelbrot_calculator {
                     let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
                     let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
 
-                    grid[row][col] = _is_in_mandelbrot_set(re, im, self.max_iter);
+                    // Rows are indexed top to bottom, so inversion is needed when populating the grid
+                    grid[self.grid_size - row - 1][col] = _is_in_mandelbrot_set(re, im, self.max_iter);
                 }
             }
 
