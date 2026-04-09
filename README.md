@@ -1,6 +1,14 @@
 # mandelbrot-set-calculator
 Rust/Python code using Maturin, that allows the user to calculate the Mandelbrot set for some chosen input. Mostly for fun, in order to learn how to pass heavy tasks to Rust from Python.
 
+The Mandelbrot set consists of points $c$ on the complex plane s.t.
+
+$$
+  z_{n+1} = z_n^2 + c\ \mbox{with}\ z_0 = 0
+$$
+
+does not explode.
+
 The code is by no means perfect, and I'll try to make it better and more rusty over time.
 But it seems to work as intended. Take this plot for example, it's of the Mandelbrot set on the domain $[-1, 1] \times [-1, 1]$:
 
