@@ -6,6 +6,6 @@ But it seems to work as intended. Take this plot for example, it's of the Mandel
 
 <img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/5ed26469-2e94-468c-8299-2a0dbb0143c1" />
 
-And this is a plot where we graduallty zoom into a point (by a factor of 4 for iteration):
+And this is a plot where we graduallty zoom into a point (by a factor of 4 for each iteration):
 
 <img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/bc9ba0e5-cba9-41a0-918e-4bc90c0e0d59" />
