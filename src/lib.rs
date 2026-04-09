@@ -18,8 +18,8 @@ mod mandelbrot_calculator {
             MandelbrotSet {grid_size}
         }
 
-        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64, max_iter: i64) -> Vec<Vec<bool>> {
-            let mut grid = vec![vec![false; self.grid_size]; self.grid_size];
+        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64, max_iter: i64) -> Vec<Vec<i64>> {
+            let mut grid = vec![vec![0; self.grid_size]; self.grid_size];
 
             for row in 0..self.grid_size {
                 for col in 0..self.grid_size {
@@ -35,11 +35,11 @@ mod mandelbrot_calculator {
         }
     }
 
-    fn _is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> bool {
+    fn _is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> i64 {
         let mut z_re = 0.0;
         let mut z_im = 0.0;
 
-        for _ in 0..max_iter {
+        for i in 0..max_iter {
             let _z_re = z_re * z_re - z_im * z_im + re;
             let _z_im = 2.0 * z_re * z_im + im;
 
@@ -47,15 +47,15 @@ mod mandelbrot_calculator {
             z_im = _z_im;
 
             if z_re * z_re + z_im * z_im > 4.0 {
-                return false;
+                return i;
             }
         }
 
-        true
+        max_iter
     }
 
     #[pyfunction]
-    fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> PyResult<bool> {
+    fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> PyResult<i64> {
         Ok(_is_in_mandelbrot_set(re, im, max_iter))
     }
 }
