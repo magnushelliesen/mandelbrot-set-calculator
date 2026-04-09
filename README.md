@@ -1,7 +1,7 @@
 # mandelbrot-set-calculator
 Rust/Python code using Maturin, that allows the user to calculate the Mandelbrot set for some chosen input. Mostly for fun, in order to learn how to pass heavy tasks to Rust from Python.
 
-The Mandelbrot set consists of points $c$ on the complex plane s.t.
+The Mandelbrot set consists of points $c$ on the complex plane for which
 
 $$
   z_{n+1} = z_n^2 + c\ \mbox{with}\ z_0 = 0
