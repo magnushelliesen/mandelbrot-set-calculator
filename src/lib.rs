@@ -34,6 +34,18 @@ mod mandelbrot_calculator {
 
             grid
         }
+    
+        fn make_grid_parallell(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64, max_iter: i64) -> Vec<i64> {
+            let par_iter = (0..max_iter).into_par_iter().map(
+                |col: i64| _is_in_mandelbrot_set(
+                    re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min),
+                    im_min + (col as f64 / (self.grid_size - 1) as f64) * (im_max - im_min),
+                    100
+                )
+            );
+            let cols: Vec<_> = par_iter.collect();
+            cols
+        }
     }
 
     fn _is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> i64 {
@@ -59,16 +71,4 @@ mod mandelbrot_calculator {
     fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> PyResult<i64> {
         Ok(_is_in_mandelbrot_set(re, im, max_iter))
     }
-
-    #[pyfunction]
-    fn test() -> PyResult<Vec<i32>> {
-        Ok(_test())
-    }
-
-    fn _test() -> Vec<i32> {
-        let par_iter = (0..5).into_par_iter().map(|x| x * 2);
-        let doubles: Vec<_> = par_iter.collect();
-        doubles
-    }
-
 }
