@@ -19,7 +19,14 @@ mod mandelbrot_calculator {
             MandelbrotSet {grid_size}
         }
 
-        fn make_grid(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64, max_iter: i64) -> Vec<Vec<i64>> {
+        fn make_grid(
+            &self,
+            re_min: f64,
+            re_max: f64,
+            im_min: f64,
+            im_max: f64,
+            max_iter: i64
+        ) -> Vec<Vec<i64>> {
             let mut grid = vec![vec![0; self.grid_size]; self.grid_size];
 
             for row in 0..self.grid_size {
@@ -27,7 +34,6 @@ mod mandelbrot_calculator {
                     let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
                     let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
 
-                    // Rows are indexed top to bottom, so inversion is needed when populating the grid
                     grid[self.grid_size - row - 1][col] = _is_in_mandelbrot_set(re, im, max_iter);
                 }
             }
@@ -35,24 +41,37 @@ mod mandelbrot_calculator {
             grid
         }
     
-        fn make_grid_parallell(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64, max_iter: i64) -> Vec<Vec<i64>> {
-            let mut grid = vec![vec![0; self.grid_size]; self.grid_size];
+        fn make_grid_parallell(
+            &self,
+            py: Python,
+            re_min: f64,
+            re_max: f64,
+            im_min: f64,
+            im_max: f64,
+            max_iter: i64
+        ) -> Vec<Vec<i64>> {
+            py.detach(|| {
+                let mut grid = vec![vec![0; self.grid_size]; self.grid_size];
 
-            for row in 0..self.grid_size{
-                let par_iter = (0..self.grid_size).into_par_iter().map(
-                    |col: usize| {
-                        let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
-                        let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
-                        _is_in_mandelbrot_set(re, im, max_iter)
-                    }
-                );
-                let cols: Vec<_> = par_iter.collect();
+                for row in 0..self.grid_size {
+                    let cols: Vec<_> = (0..self.grid_size)
+                        .into_par_iter()
+                        .map(|col: usize| {
+                            let re = re_min
+                                + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
 
-                // Rows are indexed top to bottom, so inversion is needed when populating the grid
-                grid[self.grid_size - row - 1] = cols;
-            }
+                            let im = im_min
+                                + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
 
-            grid
+                            _is_in_mandelbrot_set(re, im, max_iter)
+                        })
+                        .collect();
+
+                    grid[self.grid_size - row - 1] = cols;
+                }
+
+                grid
+            })
         }
     }
 
