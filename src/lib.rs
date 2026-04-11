@@ -39,15 +39,17 @@ mod mandelbrot_calculator {
             let mut grid = vec![vec![0; self.grid_size]; self.grid_size];
 
             for row in 0..self.grid_size{
-                let par_iter = (0..max_iter).into_par_iter().map(
-                    |col: i64| _is_in_mandelbrot_set(
-                        re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min),
-                        im_max - (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min),
-                        max_iter
-                    )
+                let par_iter = (0..self.grid_size).into_par_iter().map(
+                    |col: usize| {
+                        let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
+                        let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
+                        _is_in_mandelbrot_set(re, im, max_iter)
+                    }
                 );
                 let cols: Vec<_> = par_iter.collect();
-                grid[row] = cols;
+
+                // Rows are indexed top to bottom, so inversion is needed when populating the grid
+                grid[self.grid_size - row - 1] = cols;
             }
 
             grid
