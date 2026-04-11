@@ -5,6 +5,7 @@ use pyo3::prelude::*;
 mod mandelbrot_calculator {
     use std::f64;
     use pyo3::prelude::*;
+    use rayon::prelude::*;
 
     #[pyclass(get_all, set_all)]
     struct MandelbrotSet {
@@ -58,4 +59,16 @@ mod mandelbrot_calculator {
     fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> PyResult<i64> {
         Ok(_is_in_mandelbrot_set(re, im, max_iter))
     }
+
+    #[pyfunction]
+    fn test() -> PyResult<Vec<i32>> {
+        Ok(_test())
+    }
+
+    fn _test() -> Vec<i32> {
+        let par_iter = (0..5).into_par_iter().map(|x| x * 2);
+        let doubles: Vec<_> = par_iter.collect();
+        doubles
+    }
+
 }
