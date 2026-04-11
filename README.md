@@ -24,4 +24,4 @@ And this is a plot where we graduallty zoom into a point (by a factor of 4 for e
 
 <img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/5bea7877-4f96-489a-80ab-d799aa00d264" />
 
-Since each iteration zooms in 4 times, the last plot is zoomed in $4^8=65536$ times (relative to the first), which is equivalent to the first plot being of the whole earth and the last one being of a $100\times 100$ meter square.
+Since each iteration zooms in 4 times, the last plot is zoomed in $4^8=65536$ times (relative to the first), which is equivalent to the first plot being of the whole earth, and the last one being of a $100\times 100$ meter square.
