@@ -4,13 +4,13 @@ Rust/Python code, intergated using Maturin, that allows the user to calculate th
 The Mandelbrot set consists of points $c$ on the complex plane for which
 
 $$
-  z_{n+1} = z_n^2 + c\ \mbox{with}\ z_0 = 0
+  z_{n+1} = z_n^2 + c\ \text{with}\ z_0 = 0
 $$
 
 does not explode as $n\to\infty$. Deteremining if a point is in the set is done by checking that
 
 $$
-  |z_n|^2 = \mathrm{Re}^2(z_n) + \mathrm{Im}^2(z_n) \leq 4\ \mbox{for}\ n\leq N,
+  |z_n|^2 = \mathrm{Re}^2(z_n) + \mathrm{Im}^2(z_n) \leq 4\ \text{for}\ n\leq N,
 $$
 
 where $N$ is some maximum number of iterations. Points at which $z_n$ does not explode are given the value $N$ (and are seemingly in the set), and points where $z_n$ *does* explode are given the value $n$ at which $|z_n|^2 > 4$ (and are not in the set).
