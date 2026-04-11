@@ -40,7 +40,7 @@ mod mandelbrot_calculator {
                 |col: i64| _is_in_mandelbrot_set(
                     re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min),
                     im_min + (col as f64 / (self.grid_size - 1) as f64) * (im_max - im_min),
-                    100
+                    max_iter
                 )
             );
             let cols: Vec<_> = par_iter.collect();
