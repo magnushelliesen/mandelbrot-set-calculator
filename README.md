@@ -7,7 +7,7 @@ $$
   z_{n+1} = z_n^2 + c\ \mbox{with}\ z_0 = 0
 $$
 
-does not explode.
+does not explode. For each point, is done by checking that $\mbox{Re}^2(z_n) + \mbox{Im}^2(z_n) \leq 4$ for $n$ less than or equal to some maximum number of iterations.
 
 The code is by no means perfect, and I'll try to make it better and more rusty over time.
 But it seems to work as intended. Take this plot for example, it's of the Mandelbrot set on the domain $[-1, 1] \times [-1, 1]$:
