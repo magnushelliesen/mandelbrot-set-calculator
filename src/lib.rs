@@ -40,7 +40,7 @@ mod mandelbrot_calculator {
 
             grid
         }
-    
+
         fn make_grid_parallell(
             &self,
             py: Python,
@@ -50,24 +50,27 @@ mod mandelbrot_calculator {
             im_max: f64,
             max_iter: i64
         ) -> Vec<Vec<i64>> {
-            py.detach(|| {
-                let mut grid = vec![vec![0; self.grid_size]; self.grid_size];
-
-                for row in 0..self.grid_size {
-                    let cols: Vec<_> = (0..self.grid_size)
+            py.detach(||
+                {
+                    (0..self.grid_size)
                         .into_par_iter()
-                        .map(|col: usize| {
-                            let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
-                            let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
-                            _is_in_mandelbrot_set(re, im, max_iter)
+                        .map(|row| {
+                            (0..self.grid_size)
+                                .map(|col| {
+                                    let re = re_min
+                                        + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
+
+                                    let im = im_min
+                                        + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
+
+                                    _is_in_mandelbrot_set(re, im, max_iter)
+                                })
+                                .collect::<Vec<i64>>()
                         })
-                        .collect();
-
-                    grid[self.grid_size - row - 1] = cols;
+                        .rev()
+                        .collect()
                 }
-
-                grid
-            })
+            )
         }
     }
 
