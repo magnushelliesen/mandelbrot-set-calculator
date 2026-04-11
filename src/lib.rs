@@ -25,8 +25,8 @@ mod mandelbrot_calculator {
             re_max: f64,
             im_min: f64,
             im_max: f64,
-            max_iter: i64
-        ) -> Vec<Vec<i64>> {
+            max_iter: i32
+        ) -> Vec<Vec<i32>> {
             let mut grid = vec![vec![0; self.grid_size]; self.grid_size];
 
             for row in 0..self.grid_size {
@@ -48,8 +48,8 @@ mod mandelbrot_calculator {
             re_max: f64,
             im_min: f64,
             im_max: f64,
-            max_iter: i64
-        ) -> Vec<Vec<i64>> {
+            max_iter: i32
+        ) -> Vec<Vec<i32>> {
             py.detach(||
                 {
                     (0..self.grid_size)
@@ -57,15 +57,12 @@ mod mandelbrot_calculator {
                         .map(|row| {
                             (0..self.grid_size)
                                 .map(|col| {
-                                    let re = re_min
-                                        + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
-
-                                    let im = im_min
-                                        + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
+                                    let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
+                                    let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
 
                                     _is_in_mandelbrot_set(re, im, max_iter)
                                 })
-                                .collect::<Vec<i64>>()
+                                .collect::<Vec<i32>>()
                         })
                         .rev()
                         .collect()
@@ -74,7 +71,7 @@ mod mandelbrot_calculator {
         }
     }
 
-    fn _is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> i64 {
+    fn _is_in_mandelbrot_set(re: f64, im: f64, max_iter: i32) -> i32 {
         let mut z_re = 0.0;
         let mut z_im = 0.0;
 
@@ -94,7 +91,7 @@ mod mandelbrot_calculator {
     }
 
     #[pyfunction]
-    fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i64) -> PyResult<i64> {
+    fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i32) -> PyResult<i32> {
         Ok(_is_in_mandelbrot_set(re, im, max_iter))
     }
 }
