@@ -57,12 +57,8 @@ mod mandelbrot_calculator {
                     let cols: Vec<_> = (0..self.grid_size)
                         .into_par_iter()
                         .map(|col: usize| {
-                            let re = re_min
-                                + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
-
-                            let im = im_min
-                                + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
-
+                            let re = re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min);
+                            let im = im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
                             _is_in_mandelbrot_set(re, im, max_iter)
                         })
                         .collect();
