@@ -38,15 +38,18 @@ mod mandelbrot_calculator {
         fn make_grid_parallell(&self, re_min: f64, re_max: f64, im_min: f64, im_max: f64, max_iter: i64) -> Vec<Vec<i64>> {
             let mut grid = vec![vec![0; self.grid_size]; self.grid_size];
 
-            let par_iter = (0..max_iter).into_par_iter().map(
-                |col: i64| _is_in_mandelbrot_set(
-                    re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min),
-                    im_min + (col as f64 / (self.grid_size - 1) as f64) * (im_max - im_min),
-                    max_iter
-                )
-            );
-            let cols: Vec<_> = par_iter.collect();
-            grid[0] = cols;
+            for row in 0..self.grid_size{
+                let par_iter = (0..max_iter).into_par_iter().map(
+                    |col: i64| _is_in_mandelbrot_set(
+                        re_min + (col as f64 / (self.grid_size - 1) as f64) * (re_max - re_min),
+                        im_max - (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min),
+                        max_iter
+                    )
+                );
+                let cols: Vec<_> = par_iter.collect();
+                grid[row] = cols;
+            }
+
             grid
         }
     }
