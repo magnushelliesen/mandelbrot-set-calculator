@@ -1,5 +1,5 @@
 # mandelbrot-calculator
-Rust/Python code using Maturin, that allows the user to calculate the Mandelbrot set for some chosen input. Mostly for fun, in order to learn how to pass heavy tasks to Rust from Python.
+Rust/Python code, intergated using Maturin, that allows the user to calculate the Mandelbrot set for some chosen input. Mostly for fun, in order to learn how to pass heavy tasks to Rust from Python.
 
 The Mandelbrot set consists of points $c$ on the complex plane for which
 
