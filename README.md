@@ -18,8 +18,8 @@ where $N$ is some maximum number of iterations. Points at which $z_n$ does not e
 The code is by no means perfect, and I'll try to make it better and more rusty over time.
 But it seems to work as intended. Take this plot for example, it's of the Mandelbrot set on the domain $[-1, 1] \times [-1, 1]$:
 
-<img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/5ed26469-2e94-468c-8299-2a0dbb0143c1" />
+<img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/b942eb73-e9c4-4991-b812-6e17f6c342d4" />
 
 And this is a plot where we graduallty zoom into a point (by a factor of 4 for each iteration):
 
-<img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/e5907a2e-41de-43f3-a745-ab8fc71d30bc" />
+<img width="1019" height="1019" alt="image" src="https://github.com/user-attachments/assets/5bea7877-4f96-489a-80ab-d799aa00d264" />
