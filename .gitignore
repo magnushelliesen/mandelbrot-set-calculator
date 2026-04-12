@@ -28,7 +28,6 @@ Cargo.lock
 
 # Ignore Python cache directories
 __pycache__/
-tests/__pycache__/
 
 # Ignore compiled Python files
 *.py[cod]
