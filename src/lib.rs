@@ -38,6 +38,7 @@ mod mandelbrot_calculator {
                     let im =
                         im_min + (row as f64 / (self.grid_size - 1) as f64) * (im_max - im_min);
 
+                    // Return iteration at which point blows up
                     grid[self.grid_size - row - 1][col] =
                         _iteration_at_which_point_explodes(re, im, max_iter);
                 }
@@ -69,7 +70,7 @@ mod mandelbrot_calculator {
                                     + (row as f64 / (self.grid_size - 1) as f64)
                                         * (im_max - im_min);
 
-                                // Return what at what iteration the point blows up at
+                                // Return iteration at which point blows up
                                 _iteration_at_which_point_explodes(re, im, max_iter)
                             })
                             .collect::<Vec<i32>>()
@@ -91,6 +92,7 @@ mod mandelbrot_calculator {
             z_re = z_re_new;
             z_im = z_im_new;
 
+            // If |z| > 2 at any iteration, escape and return that iteration
             if z_re * z_re + z_im * z_im > 4.0 {
                 return i;
             }
