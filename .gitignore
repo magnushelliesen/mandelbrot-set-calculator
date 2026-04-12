@@ -25,3 +25,10 @@ Cargo.lock
 /target
 
 .venv
+
+# Ignore Python cache directories
+__pycache__/
+
+# Ignore compiled Python files
+*.py[cod]
+*$py.class

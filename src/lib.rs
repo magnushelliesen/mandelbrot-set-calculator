@@ -16,8 +16,11 @@ mod mandelbrot_calculator {
     #[pymethods]
     impl MandelbrotSet {
         #[new]
-        fn new(grid_size: usize) -> Self {
-            MandelbrotSet { grid_size }
+        fn new(grid_size: usize) -> PyResult<Self> {
+            if grid_size < 2 {
+                return Err(PyRuntimeError::new_err("grid_size must be >= 2"));
+            }
+            Ok(MandelbrotSet { grid_size })
         }
 
         fn make_grid(
