@@ -103,6 +103,6 @@ mod mandelbrot_calculator {
 
     #[pyfunction]
     fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i32) -> PyResult<bool> {
-        Ok(_iteration_at_which_point_explodes(re, im, max_iter) <= max_iter)
+        Ok(_iteration_at_which_point_explodes(re, im, max_iter) == max_iter)
     }
 }
