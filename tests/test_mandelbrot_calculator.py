@@ -1,3 +1,5 @@
+import pytest
+
 from mandelbrot_calculator import (
     is_in_mandelbrot_set,
     MandelbrotSet
@@ -30,3 +32,7 @@ def test_mandelbrot_calculator():
     observed = ms.make_grid_parallell(-1, 1, -1, 1, 100)
 
     assert expected == observed, "make_grid_parallell failed"
+
+    # Test that wrong grid_size raises error
+    with pytest.raises(RuntimeError):
+        _ = MandelbrotSet(1)

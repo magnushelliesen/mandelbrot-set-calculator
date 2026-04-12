@@ -25,3 +25,5 @@ Cargo.lock
 /target
 
 .venv
+
+__pycache__/
