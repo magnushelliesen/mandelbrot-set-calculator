@@ -3,6 +3,7 @@ use pyo3::prelude::*;
 /// A Python module implemented in Rust.
 #[pymodule]
 mod mandelbrot_calculator {
+    use pyo3::exceptions::PyRuntimeError;
     use pyo3::prelude::*;
     use rayon::prelude::*;
     use std::f64;
@@ -103,6 +104,10 @@ mod mandelbrot_calculator {
 
     #[pyfunction]
     fn is_in_mandelbrot_set(re: f64, im: f64, max_iter: i32) -> PyResult<bool> {
-        Ok(_iteration_at_which_point_explodes(re, im, max_iter) <= max_iter)
+        match _iteration_at_which_point_explodes(re, im, max_iter) {
+            i if i < max_iter => Ok(false),
+            i if i == max_iter => Ok(true),
+            _ => Err(PyRuntimeError::new_err("iteration failed")),
+        }
     }
 }
