@@ -103,12 +103,6 @@ mod mandelbrot_calculator {
         im: f64,
         max_iter: i32
     ) -> PyResult<bool> {
-        Ok(
-            if _iteration_at_which_point_explodes(re, im, max_iter) < max_iter {
-                false
-            } else {
-                true
-            }
-        )
+        Ok(_iteration_at_which_point_explodes(re, im, max_iter) < max_iter)
     }
 }
