@@ -14,7 +14,7 @@ repos:
         pass_filenames: false
 
       - id: maturin
-        name: maturin develop
-        entry: maturin develop
+        name: maturin build
+        entry: maturin build --quiet
         language: system
         pass_filenames: false
