@@ -30,9 +30,9 @@ Since each iteration zooms in 4 times, the last plot is zoomed in $4^8=65536$ ti
 ## Rust vs. Python performance
 I wrote a [Python class](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/mandelbrot_calculator_py/mandelbrot_calculator.py), doing the same calculations as performed in [Rust](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/src/lib.rs). The table below shows the speedup relative to the baseline, which is sequential Python code:
 
- | Language | Sequential  | Parallel    |
- |----------|------------:|------------:|
- | Python   | 1.0         | 2.4         |
- | Rust     | 26.6        | 106.8       |
+| Language | Sequential  | Parallel    |
+|----------|------------:|------------:|
+| Python   | 1.0         | 2.4         |
+| Rust     | 26.6        | 106.8       |
 
-The table is from this [notebook](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/compare_runtimes.ipynb).
+The table is from this [notebook](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/compare_runtimes.ipynb). Needless to say, calculating the plot with the zoom above would've taken a lot more time using Python instead of Rust.
