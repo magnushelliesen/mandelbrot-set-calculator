@@ -27,9 +27,11 @@ And this is a plot where we graduallty zoom into a point (by a factor of 4 for e
 Since each iteration zooms in 4 times, the last plot is zoomed in $4^8=65536$ times (relative to the first), which is equivalent to the first plot being of the whole earth, and the last one being of a $100\times 100$ meter square.
 
 ## Rust vs. Python performance
-I wrote a [Python class](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/mandelbrot_calculator_py/mandelbrot_calculator.py) doing the same calculations as performed in Rust. The table below shows the speedup relative to the baseline, which is sequential Python code:
+I wrote a [Python class](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/mandelbrot_calculator_py/mandelbrot_calculator.py), doing the same calculations as performed in Rust. The table below shows the speedup relative to the baseline, which is sequential Python code:
 
  | Language | Sequential  | Parallel    |
  |----------|------------:|------------:|
  | Python   | 1.0         | 2.6         |
  | Rust     | 29.0        | 88.3        |
+
+The table is from this [notebook](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/compare_runtimes.ipynb).
