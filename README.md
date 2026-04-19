@@ -32,7 +32,7 @@ I wrote a [Python class](https://github.com/magnushelliesen/mandelbrot-calculato
 
 | Language | Sequential  | Parallel    |
 |----------|------------:|------------:|
-| Python   | 1.0         | 2.4         |
-| Rust     | 26.6        | 106.8       |
+| Python   | 1.0         | 3.1         |
+| Rust     | 25.6        | 129.3       |
 
 The table is from this [notebook](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/compare_runtimes.ipynb). As it turns out, calculating the plot where we zoom in  would've taken more than an hour using sequential Python code, instead of a minute using parallel Rust code. Puh.
