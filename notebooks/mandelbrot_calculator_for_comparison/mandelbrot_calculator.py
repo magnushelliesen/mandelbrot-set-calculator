@@ -48,6 +48,7 @@ class MandelbrotSet:
         im_max: float,
         max_iter: int,
     ) -> List[List[int]]:
+        # Initialize a 2D grid to hold the iteration counts for each point
         grid = [[0 for _ in range(self.grid_size)] for _ in range(self.grid_size)]
 
         row_args = [
