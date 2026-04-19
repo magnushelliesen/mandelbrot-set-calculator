@@ -4,7 +4,7 @@ from concurrent.futures import ProcessPoolExecutor
 from typing import List, Tuple
 
 
-class MandelbrotSetPy:
+class MandelbrotSet:
     def __init__(self, grid_size: int, max_workers: int | None = None) -> None:
         self.grid_size = grid_size
         self.max_workers = max_workers
@@ -75,7 +75,7 @@ class MandelbrotSetPy:
         for col in range(grid_size):
             re = re_min + (col / (grid_size - 1)) * (re_max - re_min)
             values.append(
-                MandelbrotSetPy._iteration_at_which_point_explodes(re, im, max_iter)
+                MandelbrotSet._iteration_at_which_point_explodes(re, im, max_iter)
             )
 
         return row, values
