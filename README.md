@@ -35,4 +35,4 @@ I wrote a [Python class](https://github.com/magnushelliesen/mandelbrot-calculato
 | Python   | 1.0         | 2.4         |
 | Rust     | 26.6        | 106.8       |
 
-The table is from this [notebook](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/compare_runtimes.ipynb). Needless to say, calculating the plot with the zoom above would've taken a lot more time using Python instead of Rust.
+The table is from this [notebook](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/compare_runtimes.ipynb). As it turns out, calculating the plot where we zoom in  would've taken more than an hour using sequential Python code, instead of a minute using parallel Rust code. Puh.
