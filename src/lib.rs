@@ -51,7 +51,7 @@ mod mandelbrot_calculator {
             grid
         }
 
-        fn make_grid_parallell(
+        fn make_grid_parallel(
             &self,
             py: Python,
             re_min: f64,
