@@ -29,9 +29,9 @@ def test_mandelbrot_calculator():
 
     assert expected == observed, "make_grid failed"
 
-    observed = ms.make_grid_parallell(-1, 1, -1, 1, 100)
+    observed = ms.make_grid_parallel(-1, 1, -1, 1, 100)
 
-    assert expected == observed, "make_grid_parallell failed"
+    assert expected == observed, "make_grid_parallel failed"
 
     # Test that wrong grid_size raises error
     with pytest.raises(RuntimeError):
