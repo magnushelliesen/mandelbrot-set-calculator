@@ -1,6 +1,7 @@
 # mandelbrot-calculator
-[Rust](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/src/lib.rs)/[Python](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/run_mandelbrot_calculator.ipynb) code, intergated using Maturin, that allows the user to calculate the Mandelbrot set for some chosen input. Mostly for fun, in order to learn how to pass heavy tasks to Rust from Python.
+[Rust](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/src/lib.rs)/[Python](https://github.com/magnushelliesen/mandelbrot-calculator/blob/main/notebooks/run_mandelbrot_calculator.ipynb) code, intergated using [Maturin](https://www.maturin.rs/), that allows the user to calculate the Mandelbrot set for some chosen input. Mostly for fun, in order to learn how to pass heavy tasks to Rust from Python.
 
+## The Mandelbrot set
 The Mandelbrot set consists of points $c$ on the complex plane for which
 
 $$
